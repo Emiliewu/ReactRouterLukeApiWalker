@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import {React, useState} from 'react';
 import {
   Switch,
   Route,
   useHistory
-} from "react-router-dom";
+} from 'react-router-dom';
+import './App.css';
 
 import People from './components/People';
 import Planets from './components/Planets';
@@ -11,12 +12,11 @@ import './App.css';
 import img from './Ben_Kenobi.png';
 
 function App() {
-  
   const [category, setCategory] = useState(null);
   const [id, setId] = useState(null);
   const [valid, setValid] = useState(true);
   let history = useHistory();
-  console.log(history);
+
   const handleSelect = (evt) => {
     setCategory(evt.target.value);
   };
@@ -28,8 +28,7 @@ function App() {
     if (id && category) {
       switch (category) {
         case 'people':
-          history.push(`/people/${id}`);         
-          console.log(history);
+          history.push(`/people/${id}`);
           break;
         case 'planets':
           history.push(`/planets/${id}`);
@@ -60,15 +59,14 @@ function App() {
       <div id="result">
         { 
           valid ? 
-            <Switch>
-              <Route path="/people/:id" >
-                <People />
-              </Route>
-              <Route path="/planets/:id" >
-                <Planets />
-              </Route>
-            </Switch>
-            :
+          <Switch>
+            <Route path="/people/:id">
+            <People setValid={setValid} />
+            </Route>
+            <Route path="/planets/:id">
+            <Planets setValid={setValid} />
+            </Route>
+          </Switch> :
           <div>
             <h3>These aren't the droids you're looking for</h3>
             <img src={img} alt="Obi-Wan Kenobi" /> 

@@ -4,10 +4,10 @@ import { useParams } from "react-router";
 
 function Planets(props) {
   let { id } = useParams();
+  const {setValid} = props;
   const URL = `https://swapi.dev/api/planets/${id}/`;
   const [detail, setDetail] = useState({});
   const [loading, setLoading] = useState(true);
-  const [valid, setValid] = useState(false);
   
   console.log(id);
 
@@ -24,7 +24,7 @@ function Planets(props) {
         setLoading(false);
       })
       .catch(console.log);
-  }, [URL, setLoading]);
+  }, [URL, setValid, setLoading]);
   console.log(detail);
   return (
     <>
